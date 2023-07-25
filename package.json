@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://chat-app-uh73.onrender.com/",
+  "proxy": "https://chat-app-uh73.onrender.com",
   "dependencies": {
     "@chakra-ui/icons": "^2.1.0",
     "@chakra-ui/layout": "^2.3.0",
