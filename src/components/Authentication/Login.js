@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
+axios.defaults.baseURL = 'https://chat-app-uh73.onrender.com';
 const Login = () => {
     const [show, setShow] = useState(false);
    
