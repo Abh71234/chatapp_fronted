@@ -5,7 +5,7 @@ import UserBadgeItem from '../UserAvatar/UserBadgeItem';
 import { ChatState } from '../../Context/ChatProvider';
 import UserListItem from '../UserAvatar/UserListItem';
 import axios from 'axios';
-
+axios.defaults.baseURL = 'https://chat-app-uh73.onrender.com';
 const UpdateGroupChatModal = ({fetchAgain,setFetchAgain,fetchMessages}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [groupChatName, setGroupChatName] = useState();
