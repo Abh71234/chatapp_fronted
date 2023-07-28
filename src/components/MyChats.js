@@ -17,16 +17,22 @@ const MyChats = ({fetchAgain}) => {
 
 
 const fetchChats = async () => {
-  try {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    };
- 
-    const { data } = await axiosInstance.get('/api/chat', config); // Use the absolute URL
+  
+ if (user && user.token) {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        };
 
-    setChats(data);
+        const axiosInstance = axios.create({
+          baseURL: 'https://chat-app-uh73.onrender.com', // Set the base URL
+        });
+
+        const { data } = await axiosInstance.get('/api/chat', config); // Use the absolute URL
+
+        setChats(data);
   }
   
     catch (error) {
