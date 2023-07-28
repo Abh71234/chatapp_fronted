@@ -11,7 +11,7 @@ import './styles.css'
 import io from 'socket.io-client';
 import Lottie from 'react-lottie';
 import animationData from "../animations/typing.json";
-
+axios.defaults.baseURL = 'https://chat-app-uh73.onrender.com';
 const ENDPOINT = "https://chat-app-uh73.onrender.com/"; 
 var socket, selectedChatCompare;
 
