@@ -6,19 +6,16 @@ import { AddIcon } from '@chakra-ui/icons';
 import { getSender } from '../config/ChatLogics';
 import ChatLoading from './ChatLoading';
 import GroupChatModal from './miscellaneous/GroupChatModal';
- const axiosInstance = axios.create({
-        baseURL: 'https://chat-app-uh73.onrender.com', // Set the base URL
-      });
-const MyChats = ({fetchAgain}) => {
-    const [loggedUser, setLoggedUser] = useState();
+ 
+axios.defaults.baseURL = 'https://chat-app-uh73.onrender.com';
+
+const MyChats = ({ fetchAgain }) => {
+  const [loggedUser, setLoggedUser] = useState();
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
-   
   const toast = useToast();
 
-
-const fetchChats = async () => {
-  
- if (user && user.token) {
+  const fetchChats = async () => {
+    if (user && user.token) {
       try {
         const config = {
           headers: {
@@ -26,37 +23,33 @@ const fetchChats = async () => {
           },
         };
 
-        const axiosInstance = axios.create({
-          baseURL: 'https://chat-app-uh73.onrender.com', // Set the base URL
-        });
-
-        const { data } = await axiosInstance.get('/api/chat', config); // Use the absolute URL
-
+        const { data } = await axios.get('/api/chat', config);
         setChats(data);
-  }
-  
-    catch (error) {
-      toast({
-        title: "Error Occured!",
-        description: "Failed to Load the chats",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom-left",
-      });
+      } catch (error) {
+        toast({
+          title: 'Error Occurred!',
+          description: 'Failed to Load the chats',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'bottom-left',
+        });
+      }
     }
   };
 
   useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+    setLoggedUser(JSON.parse(localStorage.getItem('userInfo')));
+
     const delayFetchChats = setTimeout(() => {
       fetchChats();
     }, 100);
 
     return () => clearTimeout(delayFetchChats);
     // eslint-disable-next-line
-  }, [fetchAgain])
-  
+  }, [fetchAgain]);
+
+
   return (
     <Flex
     display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
