@@ -6,7 +6,9 @@ import { AddIcon } from '@chakra-ui/icons';
 import { getSender } from '../config/ChatLogics';
 import ChatLoading from './ChatLoading';
 import GroupChatModal from './miscellaneous/GroupChatModal';
-
+ const axiosInstance = axios.create({
+        baseURL: 'https://chat-app-uh73.onrender.com', // Set the base URL
+      });
 const MyChats = ({fetchAgain}) => {
     const [loggedUser, setLoggedUser] = useState();
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
@@ -21,9 +23,7 @@ const fetchChats = async () => {
         Authorization: `Bearer ${user.token}`,
       },
     };
-  const axiosInstance = axios.create({
-        baseURL: 'https://chat-app-uh73.onrender.com', // Set the base URL
-      });
+ 
     const { data } = await axiosInstance.get('/api/chat', config); // Use the absolute URL
 
     setChats(data);
