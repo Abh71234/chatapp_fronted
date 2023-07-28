@@ -6,10 +6,7 @@ import { AddIcon } from '@chakra-ui/icons';
 import { getSender } from '../config/ChatLogics';
 import ChatLoading from './ChatLoading';
 import GroupChatModal from './miscellaneous/GroupChatModal';
-// axios.defaults.baseURL = 'https://chat-app-uh73.onrender.com';
-const axiosInstance = axios.create({
-  baseURL: 'https://chat-app-uh73.onrender.com', // Set the base URL
-});
+
 const MyChats = ({fetchAgain}) => {
     const [loggedUser, setLoggedUser] = useState();
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
@@ -24,24 +21,14 @@ const fetchChats = async () => {
         Authorization: `Bearer ${user.token}`,
       },
     };
-
+  const axiosInstance = axios.create({
+        baseURL: 'https://chat-app-uh73.onrender.com', // Set the base URL
+      });
     const { data } = await axiosInstance.get('/api/chat', config); // Use the absolute URL
 
     setChats(data);
   }
-  // const fetchChats = async () => {
-  //   // console.log(user._id);
-  //   try {
-  //     const config = {
-  //       headers: {
-  //         Authorization: `Bearer ${user.token}`,
-  //       },
-  //     };
-
-  //     const { data } = await axios.get("/api/chat", config);
-  //   //   console.log(data);
-  //     setChats(data);
-  //   } 
+  
     catch (error) {
       toast({
         title: "Error Occured!",
