@@ -49,7 +49,11 @@ const fetchChats = async () => {
 
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
-    fetchChats();
+    const delayFetchChats = setTimeout(() => {
+      fetchChats();
+    }, 100);
+
+    return () => clearTimeout(delayFetchChats);
     // eslint-disable-next-line
   }, [fetchAgain])
   
