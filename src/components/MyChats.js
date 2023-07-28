@@ -6,26 +6,42 @@ import { AddIcon } from '@chakra-ui/icons';
 import { getSender } from '../config/ChatLogics';
 import ChatLoading from './ChatLoading';
 import GroupChatModal from './miscellaneous/GroupChatModal';
-axios.defaults.baseURL = 'https://chat-app-uh73.onrender.com';
+// axios.defaults.baseURL = 'https://chat-app-uh73.onrender.com';
 const MyChats = ({fetchAgain}) => {
     const [loggedUser, setLoggedUser] = useState();
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
    
   const toast = useToast();
+const axiosInstance = axios.create({
+  baseURL: 'https://chat-app-uh73.onrender.com', // Set the base URL
+});
 
-  const fetchChats = async () => {
-    // console.log(user._id);
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
+const fetchChats = async () => {
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
 
-      const { data } = await axios.get("/api/chat", config);
-    //   console.log(data);
-      setChats(data);
-    } catch (error) {
+    const { data } = await axiosInstance.get('/api/chat', config); // Use the absolute URL
+
+    setChats(data);
+  }
+  // const fetchChats = async () => {
+  //   // console.log(user._id);
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         Authorization: `Bearer ${user.token}`,
+  //       },
+  //     };
+
+  //     const { data } = await axios.get("/api/chat", config);
+  //   //   console.log(data);
+  //     setChats(data);
+  //   } 
+    catch (error) {
       toast({
         title: "Error Occured!",
         description: "Failed to Load the chats",
