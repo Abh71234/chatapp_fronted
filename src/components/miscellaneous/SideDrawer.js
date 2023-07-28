@@ -33,6 +33,7 @@ import ChatLoading from "../ChatLoading";
 import UserListItem from "../UserAvatar/UserListItem";
 import { getSender } from "../../config/ChatLogics";
 import NotificationBadge from "react-notification-badge";
+axios.defaults.baseURL = 'https://chat-app-uh73.onrender.com';
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
